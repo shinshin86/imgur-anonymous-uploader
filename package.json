@@ -4,6 +4,7 @@
   "description": "Imgur anonymous image uploder. This Simple and Easy.",
   "main": "index.js",
   "scripts": {
+    "test": "mocha --timeout 10000",
     "fmt": "prettier --write '**/*.{js,md}'"
   },
   "keywords": [
@@ -23,6 +24,8 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
     "prettier": "^2.0.5"
   }
 }

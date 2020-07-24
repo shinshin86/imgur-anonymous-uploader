@@ -59,3 +59,11 @@ Add `deletehash` to the source code before running it.
 ```bash
 IMGUR_CLIENT_ID={your imgur client id} node examples/delete.js
 ```
+
+## Test
+
+Use imgur client id.
+
+```bash
+IMGUR_CLIENT_ID={Your imgur client id} npm run test
+```
