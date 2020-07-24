@@ -1,15 +1,15 @@
 # imgur-anonymous-uploader
 
+[![npm version](https://badge.fury.io/js/imgur-anonymous-uploader.svg)](https://badge.fury.io/js/imgur-anonymous-uploader)
+
 Imgur anonymous image uploder. This is Simple and Easy.
 
 ## Install
 
-I have yet to publish to npm.
-
 ```bash
-npm install shinshin86/imgur-anonymous-uploader
+npm install imgur-anonymous-uploader
 # or
-yarn add shinshin86/imgur-anonymous-uploader
+yarn add imgur-anonymous-uploader
 ```
 
 ## Usage
