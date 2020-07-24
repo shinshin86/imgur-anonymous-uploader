@@ -1,0 +1,28 @@
+{
+  "name": "imgur-anonymous-uploader",
+  "version": "1.0.0",
+  "description": "Imgur anonymous image uploder. This Simple and Easy.",
+  "main": "index.js",
+  "scripts": {
+    "fmt": "prettier --write '**/*.{js,md}'"
+  },
+  "keywords": [
+    "imgur",
+    "image",
+    "upload",
+    "anonymous",
+    "simple",
+    "easy"
+  ],
+  "author": "shinshin86 <shinshin86npm@gmail.com> (https://github.com/shinshin86)",
+  "license": "MIT",
+  "prettier": {
+    "singleQuote": true
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
+}
