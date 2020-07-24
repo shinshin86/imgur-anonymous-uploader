@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 10000",
-    "fmt": "prettier --write '**/*.{js,md}'"
+    "fmt": "prettier --write '**/*.{js,json,md}'"
   },
   "keywords": [
     "imgur",
@@ -17,6 +17,14 @@
   ],
   "author": "shinshin86 <shinshin86npm@gmail.com> (https://github.com/shinshin86)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shinshin86/imgur-anonymous-uploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shinshin86/imgur-anonymous-uploader/issues"
+  },
+  "homepage": "https://github.com/shinshin86/imgur-anonymous-uploader#readme",
   "prettier": {
     "singleQuote": true
   },
