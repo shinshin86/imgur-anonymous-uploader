@@ -1,6 +1,6 @@
 {
   "name": "imgur-anonymous-uploader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Imgur anonymous image uploder. This Simple and Easy.",
   "main": "index.js",
   "scripts": {
