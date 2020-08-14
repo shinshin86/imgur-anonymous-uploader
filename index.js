@@ -1,7 +1,11 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
+const FileType = require('file-type');
 
 const URL = 'https://api.imgur.com/3/image';
+
+// TODO
+const validFileExtList = ['jpg', 'png'];
 
 class ImgurAnonymousUploader {
   constructor(clientId) {
@@ -12,9 +16,9 @@ class ImgurAnonymousUploader {
     this.clientId = clientId;
   }
 
-  // TODO
-  isValidFile(filePath) {
-    return filePath;
+  async isValidFile(filePath) {
+    const { ext } = await FileType.fromFile(filePath);
+    return validFileExtList.includes(ext);
   }
 
   async upload(filePath) {
@@ -22,7 +26,8 @@ class ImgurAnonymousUploader {
       return { success: false, message: 'Not found filePath' };
     }
 
-    if (!isValidFile(filePath)) {
+    const isValidFile = await this.isValidFile(filePath);
+    if (!isValidFile) {
       return {
         success: false,
         message:
