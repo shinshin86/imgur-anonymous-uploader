@@ -70,5 +70,20 @@ describe('index.js', () => {
       const result = await uploader.isValidFile('./test-images/testimg.png');
       expect(result).to.be.true;
     });
+
+    it('Valid file(gif)', async () => {
+      const result = await uploader.isValidFile('./test-images/testimg.gif');
+      expect(result).to.be.true;
+    });
+
+    it('Valid file(tif)', async () => {
+      const result = await uploader.isValidFile('./test-images/testimg.tif');
+      expect(result).to.be.true;
+    });
+
+    it('Valid file(mov)', async () => {
+      const result = await uploader.isValidFile('./test-images/testimg.mov');
+      expect(result).to.be.true;
+    });
   });
 });

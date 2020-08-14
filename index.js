@@ -4,8 +4,22 @@ const FileType = require('file-type');
 
 const URL = 'https://api.imgur.com/3/image';
 
-// TODO
-const validFileExtList = ['jpg', 'png'];
+const validFileExtList = [
+  'jpg',
+  'png',
+  'gif',
+  'apng',
+  'tif',
+  'mp4',
+  'mpg',
+  'avi',
+  'webm',
+  'mov',
+  'mkv',
+  'flv',
+  'avi',
+  'wmv',
+];
 
 class ImgurAnonymousUploader {
   constructor(clientId) {
