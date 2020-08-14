@@ -12,9 +12,22 @@ class ImgurAnonymousUploader {
     this.clientId = clientId;
   }
 
+  // TODO
+  isValidFile(filePath) {
+    return filePath;
+  }
+
   async upload(filePath) {
     if (!filePath) {
       return { success: false, message: 'Not found filePath' };
+    }
+
+    if (!isValidFile(filePath)) {
+      return {
+        success: false,
+        message:
+          "It's invalid file. A valid file can be found here: https://help.imgur.com/hc/en-us/articles/115000083326-What-files-can-I-upload-What-is-the-size-limit-",
+      };
     }
 
     try {

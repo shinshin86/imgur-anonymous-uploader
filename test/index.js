@@ -52,4 +52,13 @@ describe('index.js', () => {
       expect(deleteResponse.status).to.be.equal(200);
     });
   });
+
+  describe('isValidFile', () => {
+    const uploader = new ImgurAnonymousUploader(imgurClientId);
+
+    it.only('Valid file(jpeg)', () => {
+      const result = uploader.isValidFile('foo');
+      console.log({ result });
+    });
+  });
 });
