@@ -56,6 +56,11 @@ describe('index.js', () => {
   describe('isValidFile', () => {
     const uploader = new ImgurAnonymousUploader(imgurClientId);
 
+    it('Invalid file(txt)', async () => {
+      const result = await uploader.isValidFile('./test-images/testimg.txt');
+      expect(result).to.be.false;
+    });
+
     it('Valid file(jpeg)', async () => {
       const result = await uploader.isValidFile('./test-images/testimg.jpeg');
       expect(result).to.be.true;

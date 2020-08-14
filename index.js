@@ -31,8 +31,11 @@ class ImgurAnonymousUploader {
   }
 
   async isValidFile(filePath) {
-    const { ext } = await FileType.fromFile(filePath);
-    return validFileExtList.includes(ext);
+    const fileType = await FileType.fromFile(filePath);
+
+    if (!fileType) return false;
+
+    return validFileExtList.includes(fileType.ext);
   }
 
   async upload(filePath) {
