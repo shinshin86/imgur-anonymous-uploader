@@ -29,6 +29,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "file-type": "^14.7.1",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
