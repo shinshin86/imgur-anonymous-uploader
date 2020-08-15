@@ -21,6 +21,9 @@ const validFileExtList = [
   'wmv',
 ];
 
+const imageMaxFileSize = 20000000;
+const animatedImageAndVideoMaxFileSize = 200000000;
+
 class ImgurAnonymousUploader {
   constructor(clientId) {
     if (!clientId) {
@@ -30,12 +33,25 @@ class ImgurAnonymousUploader {
     this.clientId = clientId;
   }
 
+  getFileSize(filePath) {
+    const stats = fs.statSync(filePath);
+    return stats['size'];
+  }
+
   async isValidFile(filePath) {
     const fileType = await FileType.fromFile(filePath);
 
     if (!fileType) return false;
 
-    return validFileExtList.includes(fileType.ext);
+    if (!validFileExtList.includes(fileType.ext)) {
+      return false;
+    }
+
+    if (['jpg', 'png'].includes(fileType.ext)) {
+      return this.getFileSize(filePath) < imageMaxFileSize;
+    } else {
+      return this.getFileSize(filePath) < animatedImageAndVideoMaxFileSize;
+    }
   }
 
   async upload(filePath) {
