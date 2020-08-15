@@ -67,3 +67,33 @@ Use imgur client id.
 ```bash
 IMGUR_CLIENT_ID={Your imgur client id} npm run test
 ```
+
+
+
+## Supported Files
+
+### Supported file extensions
+
+- [x] JPEG
+- [x] PNG
+- [x] GIF
+- [x] APNG
+- [x] TIFF
+- [x] MP4
+- [x] MPEG
+- [x] AVI
+- [x] WEBM
+- [x] quicktime
+- [x] x-matroska
+- [x] x-flv
+- [x] x-msvideo
+- [x] x-ms-wmv
+
+### The maximum file size
+
+* The maximum file size for non-animated images is 20MB
+* The maximum file size for animated images (like GIFs) and video is 200MB.
+
+### Reference(imgur - help)
+
+[What files can I upload? What is the size limit? - imgur help](https://help.imgur.com/hc/en-us/articles/115000083326-What-files-can-I-upload-What-is-the-size-limit-)
