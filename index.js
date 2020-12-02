@@ -21,7 +21,7 @@ const validFileExtList = [
   'wmv',
 ];
 
-const imageMaxFileSize = 20000000;
+const imageMaxFileSize = 10000000;
 const animatedImageAndVideoMaxFileSize = 200000000;
 
 class ImgurAnonymousUploader {
