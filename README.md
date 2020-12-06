@@ -52,6 +52,18 @@ If you want to upload your file, please modify the source code.
 IMGUR_CLIENT_ID={your imgur client id} node examples/upload.js
 ```
 
+### Test image buffer upload
+
+**If you want to upload an image buffer, see the example here.**
+
+`./examples/testimg.base64` will be uploaded.
+
+If you want to upload your file, please modify the source code.
+
+```bash
+IMGUR_CLIENT_ID={your imgur client id} node examples/upload-buffer.js
+```
+
 ### Delete uploaded image
 
 Add `deletehash` to the source code before running it.
@@ -91,9 +103,11 @@ IMGUR_CLIENT_ID={Your imgur client id} npm run test
 
 ### The maximum file size
 
-* The maximum file size for non-animated images is 20MB
+* The maximum file size for non-animated images is 10MB
 * The maximum file size for animated images (like GIFs) and video is 200MB.
 
 ### Reference(imgur - help)
 
 [What files can I upload? What is the size limit? - imgur help](https://help.imgur.com/hc/en-us/articles/115000083326-What-files-can-I-upload-What-is-the-size-limit-)
+
+[Imgur API - POST Image Upload](https://apidocs.imgur.com/#c85c9dfc-7487-4de2-9ecd-66f727cf3139)
