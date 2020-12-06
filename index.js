@@ -21,7 +21,7 @@ const validFileExtList = [
   'wmv',
 ];
 
-const imageMaxFileSize = 20000000;
+const imageMaxFileSize = 10000000;
 const animatedImageAndVideoMaxFileSize = 200000000;
 
 class ImgurAnonymousUploader {
@@ -33,25 +33,89 @@ class ImgurAnonymousUploader {
     this.clientId = clientId;
   }
 
-  getFileSize(filePath) {
-    const stats = fs.statSync(filePath);
-    return stats['size'];
+  async getFileSize(filePathOrBuffer) {
+    try {
+      if (Buffer.isBuffer(filePathOrBuffer)) {
+        return filePathOrBuffer.length;
+      } else {
+        const stats = fs.statSync(filePathOrBuffer);
+        return stats['size'];
+      }  
+    } catch(error) {
+      console.log(`Error in getFileSize: ${error.message}`);
+    }
   }
 
-  async isValidFile(filePath) {
-    const fileType = await FileType.fromFile(filePath);
+  async isValidFile(filePathOrBuffer) {
+    const fileType = (Buffer.isBuffer(filePathOrBuffer)) 
+      ? await FileType.fromBuffer(filePathOrBuffer)
+      : await FileType.fromFile(filePathOrBuffer);
 
-    if (!fileType) return false;
-
+      if (!fileType) {
+      return false;
+    }
     if (!validFileExtList.includes(fileType.ext)) {
       return false;
     }
 
     if (['jpg', 'png'].includes(fileType.ext)) {
-      return this.getFileSize(filePath) < imageMaxFileSize;
+      return await this.getFileSize(filePathOrBuffer) < imageMaxFileSize;
     } else {
-      return this.getFileSize(filePath) < animatedImageAndVideoMaxFileSize;
+      return await this.getFileSize(filePathOrBuffer) < animatedImageAndVideoMaxFileSize;
     }
+  }
+  
+  async __upload(obj) {
+    try {
+      const image = Buffer.isBuffer(obj)
+        ? obj.toString('base64')
+        : obj;
+      
+      const response = await fetch(URL, {
+        method: 'POST',
+        body: image,
+        headers: {
+          Authorization: `Client-ID ${this.clientId}`,
+        },
+      });
+      const json = await response.json();
+      return json;
+    } catch(error) {
+      console.log(`ERROR: ${error}`);
+      return { success: false, message: error.message };
+    }
+  }
+
+  async uploadBuffer(buffer) {
+    try {
+      if (!Buffer.isBuffer(buffer)) {
+        return {
+          success: false,
+          message: "Expected a buffer."
+        }
+      }
+      const isValidFile = await this.isValidFile(buffer);
+      if (!isValidFile) {
+        return {
+          success: false,
+          message: "Not a valid file."
+        };
+      }
+      const json = await this.__upload(buffer);
+      // console.log(JSON.stringify(json));
+      return {
+        success: json.success,
+        status: json.status,
+        url: json.data.link,
+        deleteHash: json.data.deletehash,
+      };
+
+    } catch(error) {
+      return { success: false, message: error.message };
+    }
+  }
+  async uploadFile(filePath) {
+    return await this.upload(filePath);
   }
 
   async upload(filePath) {
@@ -71,15 +135,7 @@ class ImgurAnonymousUploader {
     try {
       const image = fs.readFileSync(filePath, 'base64');
 
-      const response = await fetch(URL, {
-        method: 'POST',
-        body: JSON.stringify(image),
-        headers: {
-          Authorization: `Client-ID ${this.clientId}`,
-        },
-      });
-
-      const json = await response.json();
+      const json = await this.__upload(image);
 
       return {
         success: json.success,
