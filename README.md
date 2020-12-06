@@ -52,6 +52,18 @@ If you want to upload your file, please modify the source code.
 IMGUR_CLIENT_ID={your imgur client id} node examples/upload.js
 ```
 
+### Test image buffer upload
+
+**If you want to upload an image buffer, see the example here.**
+
+`./examples/testimg.base64` will be uploaded.
+
+If you want to upload your file, please modify the source code.
+
+```bash
+IMGUR_CLIENT_ID={your imgur client id} node examples/upload-buffer.js
+```
+
 ### Delete uploaded image
 
 Add `deletehash` to the source code before running it.
