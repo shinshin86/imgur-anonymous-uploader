@@ -40,18 +40,18 @@ class ImgurAnonymousUploader {
       } else {
         const stats = fs.statSync(filePathOrBuffer);
         return stats['size'];
-      }  
-    } catch(error) {
+      }
+    } catch (error) {
       console.log(`Error in getFileSize: ${error.message}`);
     }
   }
 
   async isValidFile(filePathOrBuffer) {
-    const fileType = (Buffer.isBuffer(filePathOrBuffer)) 
+    const fileType = Buffer.isBuffer(filePathOrBuffer)
       ? await FileType.fromBuffer(filePathOrBuffer)
       : await FileType.fromFile(filePathOrBuffer);
 
-      if (!fileType) {
+    if (!fileType) {
       return false;
     }
     if (!validFileExtList.includes(fileType.ext)) {
@@ -59,18 +59,19 @@ class ImgurAnonymousUploader {
     }
 
     if (['jpg', 'png'].includes(fileType.ext)) {
-      return await this.getFileSize(filePathOrBuffer) < imageMaxFileSize;
+      return (await this.getFileSize(filePathOrBuffer)) < imageMaxFileSize;
     } else {
-      return await this.getFileSize(filePathOrBuffer) < animatedImageAndVideoMaxFileSize;
+      return (
+        (await this.getFileSize(filePathOrBuffer)) <
+        animatedImageAndVideoMaxFileSize
+      );
     }
   }
-  
+
   async __upload(obj) {
     try {
-      const image = Buffer.isBuffer(obj)
-        ? obj.toString('base64')
-        : obj;
-      
+      const image = Buffer.isBuffer(obj) ? obj.toString('base64') : obj;
+
       const response = await fetch(URL, {
         method: 'POST',
         body: image,
@@ -80,7 +81,7 @@ class ImgurAnonymousUploader {
       });
       const json = await response.json();
       return json;
-    } catch(error) {
+    } catch (error) {
       console.log(`ERROR: ${error}`);
       return { success: false, message: error.message };
     }
@@ -91,14 +92,14 @@ class ImgurAnonymousUploader {
       if (!Buffer.isBuffer(buffer)) {
         return {
           success: false,
-          message: "Expected a buffer."
-        }
+          message: 'Expected a buffer.',
+        };
       }
       const isValidFile = await this.isValidFile(buffer);
       if (!isValidFile) {
         return {
           success: false,
-          message: "Not a valid file."
+          message: 'Not a valid file.',
         };
       }
       const json = await this.__upload(buffer);
@@ -109,8 +110,7 @@ class ImgurAnonymousUploader {
         url: json.data.link,
         deleteHash: json.data.deletehash,
       };
-
-    } catch(error) {
+    } catch (error) {
       return { success: false, message: error.message };
     }
   }

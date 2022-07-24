@@ -6,7 +6,10 @@ const ImgurAnonymousUploader = require('../index');
 describe('index.js', () => {
   const imgurClientId = process.env.IMGUR_CLIENT_ID;
   const imagePath = path.join(__dirname, '..', 'examples', 'testimg.png');
-  const imageBase64String = fs.readFileSync(path.join(__dirname, '..', 'examples', 'testimg.base64'), 'utf8');
+  const imageBase64String = fs.readFileSync(
+    path.join(__dirname, '..', 'examples', 'testimg.base64'),
+    'utf8'
+  );
   const imageBase64 = Buffer.from(imageBase64String, 'base64');
   describe('initialize', () => {
     it('When not imgur client id', () => {
@@ -153,7 +156,7 @@ describe('index.js', () => {
     });
     it('Valid file(base64)', async () => {
       const result = await uploader.isValidFile(imageBase64);
-      expect(result).to.be.true;  
+      expect(result).to.be.true;
     });
   });
 });

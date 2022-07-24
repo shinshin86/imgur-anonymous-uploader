@@ -80,8 +80,6 @@ Use imgur client id.
 IMGUR_CLIENT_ID={Your imgur client id} npm run test
 ```
 
-
-
 ## Supported Files
 
 ### Supported file extensions
@@ -103,8 +101,8 @@ IMGUR_CLIENT_ID={Your imgur client id} npm run test
 
 ### The maximum file size
 
-* The maximum file size for non-animated images is 10MB
-* The maximum file size for animated images (like GIFs) and video is 200MB.
+- The maximum file size for non-animated images is 10MB
+- The maximum file size for animated images (like GIFs) and video is 200MB.
 
 ### Reference(imgur - help)
 
