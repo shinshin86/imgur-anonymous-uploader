@@ -1,6 +1,6 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
-const FileType = require('file-type');
+const { fileTypeFromBuffer, fileTypeFromFile } = require('file-type');
 
 const URL = 'https://api.imgur.com/3/image';
 
@@ -48,8 +48,8 @@ class ImgurAnonymousUploader {
 
   async isValidFile(filePathOrBuffer) {
     const fileType = Buffer.isBuffer(filePathOrBuffer)
-      ? await FileType.fromBuffer(filePathOrBuffer)
-      : await FileType.fromFile(filePathOrBuffer);
+      ? await fileTypeFromBuffer(filePathOrBuffer)
+      : await fileTypeFromFile(filePathOrBuffer);
 
     if (!fileType) {
       return false;
